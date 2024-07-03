@@ -1,3 +1,7 @@
 # xebia8
-```npm start```
+for running `Frontend`
+```cd Frontend
+npm i
+npm run dev```
+
 
