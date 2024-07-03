@@ -9,7 +9,7 @@ export const Login = ({ onSubmit }) => {
   const [showPasswordError, setShowPasswordError] = useState(false);
   const [passwordVisible, setPasswordVisible] = useState(false);
 
-  const handleLogin = () => {
+  const handleLogin = async () => {
     if (username === "") {
       setShowUsernameError(true);
       return;
@@ -20,6 +20,17 @@ export const Login = ({ onSubmit }) => {
       return;
     }
     setShowPasswordError(false);
+    // const response = await fetch("http://localhost:3000/users/login", {
+    //   method: "POST",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //   },
+    //   body: JSON.stringify({
+    //     username: username,
+    //     password: password,
+    //   }),
+    // });
+    // console.log(response);
     onSubmit();
   };
 

@@ -3,6 +3,8 @@ import { TextBox } from "../TextBox/TextBox";
 import { MdDeleteOutline } from "react-icons/md";
 import { MdOutlineClose } from "react-icons/md";
 import AddressImage from "./image-address.jpg";
+import axios from 'axios';
+
 
 export const HomeAddress = ({ onSubmit }) => {
   const [suggestions, setSuggestions] = useState([]);
@@ -36,6 +38,30 @@ export const HomeAddress = ({ onSubmit }) => {
   ];
 
   useEffect(() => {
+    async function fetchAPI() {
+      try {
+        const apiKey = "HZ19-EK15-HB51-BU85"; // Replace with your actual Loqate API key
+        const addressUrl =
+          "https://api.addressy.com/Capture/Interactive/Find/v1.10/json3.ws";
+
+        const params = {
+          Key: apiKey,
+          Text: query,
+          IsMiddleware: false,
+          Limit: 10,
+          Language: "en-gb",
+          Country: 'US', // Ensure country code is in uppercase
+        };
+
+        const response = await axios.get(addressUrl, { params });
+        console.log("Address Validation Response:", response.data);
+      } catch (err) {
+        console.log(err);
+      }
+    }
+
+    fetchAPI();
+
     const fetchSuggestions = () => {
       if (query.length >= 1) {
         const filteredSuggestions = demoData.filter((item) =>
